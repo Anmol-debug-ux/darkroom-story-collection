@@ -1,24 +1,47 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useCallback, useState } from "react";
+import { Preloader, CookieBanner } from "@/components/site/chrome";
+import { Hero, Marquee, About, Reel, Dailies, Nav } from "@/components/site/sections-a";
+import { Craft, Workflow, Toolkit, Collaborate, Testimonials, Pricing, Faq, Credits, Footer } from "@/components/site/sections-b";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Anmol Srivastava — AI Artist & Creative Automation Specialist" },
+      { name: "description", content: "Cinematic AI design, films, UGC ads and creative automation systems by Anmol Srivastava." },
+      { property: "og:title", content: "Anmol Srivastava — AI Creative Automation Specialist" },
+      { property: "og:description", content: "Creative direction, AI production, and automation systems for brands that want to move faster without looking like it." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  const [, setReady] = useState(false);
+  const done = useCallback(() => setReady(true), []);
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <Preloader onDone={done} />
+      <Nav />
+      <main>
+        <Hero />
+        <Marquee />
+        <About />
+        <Reel />
+        <Dailies />
+        <Craft />
+        <Workflow />
+        <Toolkit />
+        <Collaborate />
+        <Testimonials />
+        <Pricing />
+        <Faq />
+        <Credits />
+      </main>
+      <Footer />
+      <CookieBanner />
+    </>
   );
 }
