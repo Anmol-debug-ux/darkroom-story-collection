@@ -11,8 +11,10 @@ type Ctx = {
   theme: "dark" | "light";
   toggleTheme: () => void;
 };
-const SiteCtx = createContext<Ctx | null>(null);
-export const useSite = () => useContext(SiteCtx)!;
+const noop = () => {};
+const fallback: Ctx = { openCmd: noop, openBooking: noop, openProject: noop, theme: "dark", toggleTheme: noop };
+const SiteCtx = createContext<Ctx>(fallback);
+export const useSite = () => useContext(SiteCtx) ?? fallback;
 
 export function SiteProvider({ children }: { children: ReactNode }) {
   const [cmd, setCmd] = useState(false);
