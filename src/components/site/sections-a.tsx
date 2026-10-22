@@ -53,7 +53,7 @@ export function Hero() {
       <motion.div style={{ opacity: fade }} className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 md:px-10 lg:grid-cols-[1.25fr_1fr]">
         <div>
           <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="timecode">SCENE 01 — COLD OPEN</motion.span>
-          <h1 className="font-display mt-8 text-[17vw] animate-flicker sm:text-8xl lg:text-[8.5rem]">
+          <h1 className="font-display mt-8 text-[17vw] animate-flicker sm:text-8xl lg:text-[6.5rem] xl:text-[7.5rem]">
             {heroLines.map((l, i) => (
               <span key={i} className="block overflow-hidden pb-1">
                 <motion.span className="block" initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 1, delay: 0.3 + i * 0.12, ease: [0.2, 0.8, 0.2, 1] }}>{l}</motion.span>
