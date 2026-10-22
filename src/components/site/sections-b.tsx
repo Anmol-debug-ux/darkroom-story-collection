@@ -73,13 +73,13 @@ export function Workflow() {
             <AnimatePresence mode="wait">
               <motion.div key={i} initial={{ opacity: 0, y: 20, filter: "blur(6px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(6px)" }} transition={{ duration: 0.4 }}>
                 <div className="font-display text-[9rem] leading-none text-gold/20">{String(i + 1).padStart(2, "0")}</div>
-                <h3 className="font-display -mt-10 text-6xl">{stages[i][0]}</h3>
-                <p className="mt-4 max-w-md text-lg text-muted-foreground">{stages[i][1]}</p>
+                <h3 className="font-display -mt-10 text-6xl">{stages[i]![0]}</h3>
+                <p className="mt-4 max-w-md text-lg text-muted-foreground">{stages[i]![1]}</p>
               </motion.div>
             </AnimatePresence>
             <div className="glass rounded-2xl p-6">
               <div className="flex justify-between font-mono text-[10px] tracking-widest text-muted-foreground">
-                <span>PRODUCTION TIMELINE</span><span className="text-gold">{String(i + 1).padStart(2, "0")} / 09 — {stages[i][0]}</span>
+                <span>PRODUCTION TIMELINE</span><span className="text-gold">{String(i + 1).padStart(2, "0")} / 09 — {stages[i]![0]}</span>
               </div>
               <div className="relative mt-8 h-16" data-cursor="DRAG">
                 <div className="absolute inset-x-0 top-1/2 h-px bg-border" />
@@ -166,7 +166,7 @@ const placeholderQuotes = [
 export function Testimonials() {
   const [i, setI] = useState(0);
   useEffect(() => { const id = setInterval(() => setI((v) => (v + 1) % placeholderQuotes.length), 6000); return () => clearInterval(id); }, []);
-  const q = placeholderQuotes[i];
+  const q = placeholderQuotes[i]!;
   return (
     <section className="py-32">
       <div className="mx-auto max-w-4xl px-6 text-center md:px-10">
@@ -247,12 +247,12 @@ const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export function Credits() {
   const [form, setForm] = useState({ name: "", email: "", type: "", budget: "", message: "" });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Partial<Record<"name" | "email" | "type" | "message", string>>>({});
   const [sent, setSent] = useState(false);
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => setForm({ ...form, [k]: e.target.value });
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    const er: Record<string, string> = {};
+    const er: Partial<Record<"name" | "email" | "type" | "message", string>> = {};
     if (form.name.trim().length < 2) er.name = "Please enter your name";
     if (!emailRe.test(form.email.trim())) er.email = "Please enter a valid email";
     if (!form.type) er.type = "Pick a project type";
@@ -331,7 +331,7 @@ export function Footer() {
         <div className="md:col-span-2">
           <div className="font-display text-4xl">Anmol Srivastava</div>
           <p className="mt-3 max-w-sm text-sm text-muted-foreground">AI Creative Automation Specialist — design, storytelling, and systems for brands moving faster than their headcount.</p>
-          <form onSubmit={(e) => { e.preventDefault(); if (!emailRe.test(email)) return toast.error("Please enter a valid email"); toast.success("You're on the list"); setEmail(""); }} className="mt-6 flex max-w-sm gap-2">
+          <form onSubmit={(e) => { e.preventDefault(); if (!emailRe.test(email)) { toast.error("Please enter a valid email"); return; } toast.success("You're on the list"); setEmail(""); }} className="mt-6 flex max-w-sm gap-2">
             <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Newsletter — your email" aria-label="Newsletter email" className="flex-1 rounded-full border bg-transparent px-4 py-2.5 text-sm outline-none focus:border-gold" />
             <button className="rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground">Join</button>
           </form>
