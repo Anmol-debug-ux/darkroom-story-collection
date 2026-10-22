@@ -94,7 +94,7 @@ function CommandMenu({ open, onClose, onProject, onBook }: { open: boolean; onCl
             <ul className="max-h-[50vh] overflow-y-auto p-2">
               {items.map((it, n) => (
                 <li key={it.group + it.label}>
-                  {(n === 0 || items[n - 1].group !== it.group) && <div className="eyebrow px-3 pb-1 pt-3 text-[10px]">{it.group}</div>}
+                  {(n === 0 || items[n - 1]!.group !== it.group) && <div className="eyebrow px-3 pb-1 pt-3 text-[10px]">{it.group}</div>}
                   <button onMouseEnter={() => setI(n)} onClick={it.run}
                     className={`w-full rounded-lg px-3 py-2.5 text-left text-sm ${n === i ? "bg-accent text-foreground" : "text-muted-foreground"}`}>{it.label}</button>
                 </li>

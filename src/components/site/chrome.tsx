@@ -67,7 +67,7 @@ export function FilmChrome() {
         <span className="text-gold">{String(scene + 1).padStart(2, "0")}</span>
         <span className="relative h-px w-16 bg-border"><motion.span className="absolute inset-0 origin-left bg-gold" animate={{ scaleX: (scene + 1) / scenes.length }} /></span>
         <span>{String(scenes.length).padStart(2, "0")}</span>
-        <span className="uppercase tracking-widest">{scenes[scene].label}</span>
+        <span className="uppercase tracking-widest">{scenes[scene]!.label}</span>
       </div>
       <AnimatePresence>
         {!top && (
