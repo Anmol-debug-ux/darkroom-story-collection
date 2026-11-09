@@ -1,8 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, useState } from "react";
-import { Preloader, CookieBanner } from "@/components/site/chrome";
-import { Hero, Marquee, About, Reel, Dailies, Nav } from "@/components/site/sections-a";
-import { Craft, Workflow, Toolkit, Collaborate, Testimonials, Pricing, Faq, Credits, Footer } from "@/components/site/sections-b";
+import { AgentPortfolio } from "@/components/site/agent-portfolio";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -19,29 +16,5 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const [, setReady] = useState(false);
-  const done = useCallback(() => setReady(true), []);
-  return (
-    <>
-      <Preloader onDone={done} />
-      <Nav />
-      <main>
-        <Hero />
-        <Marquee />
-        <About />
-        <Reel />
-        <Dailies />
-        <Craft />
-        <Workflow />
-        <Toolkit />
-        <Collaborate />
-        <Testimonials />
-        <Pricing />
-        <Faq />
-        <Credits />
-      </main>
-      <Footer />
-      <CookieBanner />
-    </>
-  );
+  return <AgentPortfolio />;
 }
