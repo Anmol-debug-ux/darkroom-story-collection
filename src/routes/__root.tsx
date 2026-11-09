@@ -97,7 +97,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Anton&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Caveat+Brush&family=Bebas+Neue&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -123,6 +123,7 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <script dangerouslySetInnerHTML={{ __html: `try{var q=new URLSearchParams(location.search).get('agents'),p=localStorage.getItem('portfolio-agents');if(location.pathname==='/'&&(q==='on'||q!=='off'&&(p==='on'||p!=='off'&&!matchMedia('(prefers-reduced-motion: reduce)').matches)))document.documentElement.classList.add('build-mode')}catch(e){}` }} />
       </head>
       <body>
         {children}
@@ -139,9 +140,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <SiteProvider>
-        <SmoothScroll />
-        <FilmChrome />
-        <Cursor />
+        {pathname !== "/" && <><SmoothScroll /><FilmChrome /><Cursor /></>}
         <AnimatePresence mode="wait">
           <motion.div key={pathname} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }}>
             <Outlet />

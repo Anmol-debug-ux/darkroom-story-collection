@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep the portfolio on the existing TanStack Start router; the homepage uses a dedicated agent-builder experience to avoid overlapping legacy cinematic controls.
+- Keep verified personal data in the portfolio content module and animate it with one requestAnimationFrame scheduler and IntersectionObserver; this isolates animation state from factual content.
