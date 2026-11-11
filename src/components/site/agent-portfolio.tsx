@@ -1,7 +1,7 @@
 import { ArrowUpRight, ArrowDown, MapPin, Mail, Linkedin, Youtube, ArrowUp, Plus } from 'lucide-react';
 import { Link } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
-import portrait from '@/assets/anmol-suit-portrait.png';
+import portrait from '@/assets/anmol-slim-suit-portrait.png';
 import { profile, portfolioTools, selectedWork, records, skills } from '@/lib/portfolio';
 import { AgentBuilder } from './agent-builder';
 
