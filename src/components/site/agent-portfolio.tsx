@@ -1,7 +1,7 @@
 import { ArrowUpRight, ArrowDown, MapPin, Mail, Linkedin, Youtube, ArrowUp, Plus } from 'lucide-react';
 import { Link } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
-import portrait from '@/assets/anmol-suit-portrait.png';
+import portrait from '@/assets/m00.jpg.asset.json';
 import { profile, portfolioTools, selectedWork, records, skills } from '@/lib/portfolio';
 import { AgentBuilder } from './agent-builder';
 
@@ -16,7 +16,7 @@ export function AgentPortfolio() {
       <section id="hero" className="portfolio-hero">
         <div className="hero-topline"><span className="portfolio-label">CREATIVE INTELLIGENCE / HUMAN TOUCH</span><span className="portfolio-label">PORTFOLIO — 2026</span></div>
         <div className="portfolio-word" aria-hidden="true" data-build="wipe">PORTFOLIO</div>
-        <img className="portfolio-portrait" src={portrait} alt="Anmol Srivastava in a black suit" data-build="pop" />
+        <img className="portfolio-portrait" src={portrait.url} alt="Anmol Srivastava — original portrait" data-build="pop" />
         <div className="hero-intro">
           <p className="handwritten" data-build="type">Hello, I'm</p>
           <h1 data-build="wipe">ANMOL<br />SRIVASTAVA<span>.</span></h1>
