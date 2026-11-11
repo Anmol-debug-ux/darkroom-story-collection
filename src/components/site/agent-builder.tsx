@@ -34,14 +34,15 @@ export function AgentBuilder() {
       if (event.key.toLowerCase() === 't') startTour();
       if (event.key.toLowerCase() === 'a') toggle();
       if (event.key.toLowerCase() === 'p') setPaused(v => !v);
-      if (event.key === 'Escape') setTour(false);
+      if (event.key === 'Escape' || ['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)) setTour(false);
     };
     const stop = () => setTour(false);
+    const pointerStop = (event: PointerEvent) => { if (!(event.target instanceof Element) || !event.target.closest('.agent-dock')) setTour(false); };
     window.addEventListener('keydown', key);
     window.addEventListener('wheel', stop, { passive: true });
     window.addEventListener('touchmove', stop, { passive: true });
-    window.addEventListener('pointerdown', stop);
-    return () => { window.removeEventListener('keydown', key); window.removeEventListener('wheel', stop); window.removeEventListener('touchmove', stop); window.removeEventListener('pointerdown', stop); };
+    window.addEventListener('pointerdown', pointerStop);
+    return () => { window.removeEventListener('keydown', key); window.removeEventListener('wheel', stop); window.removeEventListener('touchmove', stop); window.removeEventListener('pointerdown', pointerStop); };
   }, []);
   useEffect(() => {
     if (boot) return;
@@ -81,7 +82,7 @@ export function AgentBuilder() {
           if (!eligible.has(el) || done.has(el) || jobs.some(j => j.el === el)) continue;
           const slot = Array.from({ length: count }, (_, i) => i).find(i => !jobs.some(j => j.slot === i));
           if (slot === undefined) break;
-          const text = el.dataset.build === 'type' && el.children.length === 0 ? el.textContent : null;
+          const text = el.dataset['build'] === 'type' && el.children.length === 0 ? el.textContent : null;
           jobs.push({ el, start: clock + slot * 65, slot, text });
         }
         for (let i = jobs.length - 1; i >= 0; i--) {
@@ -99,7 +100,7 @@ export function AgentBuilder() {
             job.el.style.visibility = 'visible';
             const reveal = Math.min(1, (progress - .3) / .7);
             if (job.text !== null) job.el.textContent = job.text.slice(0, Math.ceil(job.text.length * reveal));
-            else if (job.el.dataset.build === 'wipe') job.el.style.clipPath = `inset(0 ${100 - reveal * 100}% 0 0)`;
+            else if (job.el.dataset['build'] === 'wipe') job.el.style.clipPath = `inset(0 ${100 - reveal * 100}% 0 0)`;
             else job.el.style.transform = `translateY(${(1 - reveal) * 12}px) scale(${.96 + reveal * .04})`;
           }
           if (progress === 1) { finish(job); jobs.splice(i, 1); }
@@ -109,10 +110,12 @@ export function AgentBuilder() {
           if (heroDone && tourStart === null) tourStart = clock;
           if (tourStart !== null) {
             const max = document.documentElement.scrollHeight - innerHeight;
-            const elapsed = (clock - tourStart) / 1000;
-            const distance = Math.max(0, elapsed - 1) * 100;
-            window.scrollTo(0, Math.min(max, distance));
-            if (distance >= max + 100) setTour(false);
+            const duration = Math.max(12, max / 120 + 4);
+            const t = Math.max(0, Math.min(1, ((clock - tourStart) / 1000 - 1) / duration));
+            const ramp = .1;
+            const eased = t < ramp ? t * t / (2 * ramp * (1 - ramp)) : t > 1 - ramp ? 1 - (1 - t) ** 2 / (2 * ramp * (1 - ramp)) : (t - ramp / 2) / (1 - ramp);
+            window.scrollTo(0, max * eased);
+            if (t === 1) setTour(false);
           }
         } else tourStart = null;
       }
