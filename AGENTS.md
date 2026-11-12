@@ -11,3 +11,4 @@
 
 - Keep the portfolio on the existing TanStack Start router; the homepage uses a dedicated agent-builder experience to avoid overlapping legacy cinematic controls.
 - Keep verified personal data in the portfolio content module and animate it with one requestAnimationFrame scheduler and IntersectionObserver; this isolates animation state from factual content.
+- Restore original creative media through the shared content catalog and a separate gallery with accessible image and video dialogs; this prevents duplicate asset lists and preserves playable work.
