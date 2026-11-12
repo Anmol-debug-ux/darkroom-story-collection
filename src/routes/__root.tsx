@@ -16,6 +16,7 @@ import { SiteProvider } from "@/components/site/overlays";
 import { SmoothScroll } from "@/components/site/smooth";
 import { FilmChrome } from "@/components/site/chrome";
 import { Cursor } from "@/components/site/fx";
+import { ChatSession } from '@/lib/chat-session';
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -140,12 +141,14 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <SiteProvider>
-        {pathname !== "/" && <><SmoothScroll /><FilmChrome /><Cursor /></>}
+        <ChatSession>
+        {pathname !== "/" && !pathname.startsWith('/chat') && <><SmoothScroll /><FilmChrome /><Cursor /></>}
         <AnimatePresence mode="wait">
           <motion.div key={pathname} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }}>
             <Outlet />
           </motion.div>
         </AnimatePresence>
+        </ChatSession>
         <Toaster theme="dark" position="bottom-center" />
       </SiteProvider>
     </QueryClientProvider>

@@ -12,7 +12,7 @@ function SectionTitle({ number, label, title }: { number: string; label: string;
 }
 export function AgentPortfolio() {
   return <div className="portfolio-page">
-    <header className="portfolio-nav"><a href="#hero" className="portfolio-monogram" aria-label="Anmol Srivastava home">as<span>.</span></a><nav aria-label="Main navigation">{nav.map(item => <a key={item} href={`#${item.toLowerCase()}`}>{item}</a>)}</nav><Button asChild variant="outline" className="nav-contact"><a href={`mailto:${profile.email}`}>Let's talk <ArrowUpRight /></a></Button></header>
+    <header className="portfolio-nav"><a href="#hero" className="portfolio-monogram" aria-label="Anmol Srivastava home">as<span>.</span></a><nav aria-label="Main navigation">{nav.map(item => <a key={item} href={`#${item.toLowerCase()}`}>{item}</a>)}<Link to="/chat">AI Chat</Link></nav><Button asChild variant="outline" className="nav-contact"><a href={`mailto:${profile.email}`}>Let's talk <ArrowUpRight /></a></Button></header>
     <main>
       <section id="hero" className="portfolio-hero">
         <div className="hero-topline"><span className="portfolio-label">CREATIVE INTELLIGENCE / HUMAN TOUCH</span><span className="portfolio-label">PORTFOLIO — 2026</span></div>
@@ -43,5 +43,6 @@ export function AgentPortfolio() {
     </main>
     <footer className="portfolio-footer"><a href="#hero" className="portfolio-monogram">as<span>.</span></a><span>© 2026 ANMOL SRIVASTAVA</span><div><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link><a href="#hero" aria-label="Back to top"><ArrowUp size={16} /></a></div></footer>
     <AgentBuilder />
+    <Button asChild className="chat-launch" title="Open AI chatbot"><Link to="/chat"><span aria-hidden="true">as.</span> AI Chat <ArrowUpRight /></Link></Button>
   </div>;
 }
