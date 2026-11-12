@@ -7,7 +7,11 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
-  vite: { optimizeDeps: { include: ["framer-motion", "lenis", "sonner"] } },
+  vite: {
+    // Prebundle the gallery dialog with React at startup, rather than creating a
+    // new dependency graph while an existing preview session is already open.
+    optimizeDeps: { include: ["framer-motion", "lenis", "sonner", "@radix-ui/react-dialog"] },
+  },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this

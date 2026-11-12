@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import portrait from '@/assets/anmol-slim-suit-portrait.png';
 import { profile, portfolioTools, selectedWork, records, skills } from '@/lib/portfolio';
 import { AgentBuilder } from './agent-builder';
+import { WorkCollection } from './work-collection';
 
 const nav = ['Work', 'Stack', 'Record', 'About', 'Contact'];
 function SectionTitle({ number, label, title }: { number: string; label: string; title: string }) {
@@ -31,8 +32,9 @@ export function AgentPortfolio() {
         <div className="hero-bottom"><span className="portfolio-label">DESIGN × AI × AUTOMATION</span><a href="#work" aria-label="Scroll to work"><ArrowDown size={16} /> SELECTED WORK BELOW</a><span className="portfolio-label">BUILT WITH INTENT.</span></div>
       </section>
       <section id="work" className="portfolio-section">
-        <div className="section-heading-row"><SectionTitle number="01" label="SELECTED PROJECTS" title="Work that ships." /><p className="section-aside" data-build="type">From creative experiments to practical systems.<br />A selection of my projects.</p></div>
+        <div className="section-heading-row"><SectionTitle number="01" label="PROJECTS & CREATIVE WORK" title="Work that ships." /><p className="section-aside" data-build="type">Projects, design, and motion.<br />My complete portfolio collection.</p></div>
         <div className="work-grid">{selectedWork.map((project, index) => <article className="work-card" key={project.title} data-build="pop"><div className="work-card-top"><span className="portfolio-label">{project.category}</span><span className="work-index">/{String(index + 1).padStart(2, '0')}</span></div><h3>{project.title}</h3><p>{project.summary}</p><ul>{project.points.map(point => <li key={point}>{point}</li>)}</ul><div className="work-card-bottom"><div className="tech-tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>{project.href && <a href={project.href} target="_blank" rel="noreferrer">{project.linkLabel} <ArrowUpRight size={14} /></a>}</div></article>)}</div>
+        <WorkCollection />
       </section>
       <section id="stack" className="portfolio-stack"><div className="portfolio-section stack-heading"><span className="portfolio-label" data-build="type">02 / THE TOOLKIT</span><p data-build="type">A creative mind. A connected stack.</p></div><div className="stack-window"><div className="stack-track">{[0, 1].map(copy => <div key={copy} aria-hidden={copy === 1}>{portfolioTools.map(tool => <span key={tool}>{tool}<Plus size={16} /></span>)}</div>)}</div></div></section>
       <section id="record" className="portfolio-section record-section"><SectionTitle number="03" label="THE JOURNEY" title="Still building. Always learning." /><div className="record-list">{records.map(record => <article data-build="pop" key={record.title}><span className="portfolio-label">{record.date}</span><div><h3>{record.title}</h3><p>{record.detail}</p></div><span className="record-note">{record.label}</span><ArrowUpRight size={19} /></article>)}</div></section>
