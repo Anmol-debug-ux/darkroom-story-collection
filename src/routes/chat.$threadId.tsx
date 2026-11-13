@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { ChatWorkspace } from '@/components/site/chat-workspace';
 export const Route = createFileRoute('/chat/$threadId')({
-  validateSearch: (search: Record<string, unknown>): { send?: boolean } => ({ send: search.send === true || search.send === 'true' ? true : undefined }),
+  validateSearch: (search: Record<string, unknown>): { send?: boolean } => search['send'] === true || search['send'] === 'true' ? { send: true } : {},
   head: () => ({ meta: [
     { title: 'Conversation — Anmol’s AI Assistant' },
     { name: 'description', content: 'A temporary conversation with Anmol’s Gemini-powered AI assistant.' },

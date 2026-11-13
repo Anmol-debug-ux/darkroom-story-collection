@@ -73,7 +73,8 @@ export function ChatWorkspace({ threadId }: { threadId?: string }) {
     const next = [...messages, user]; commit(next); void answer(next);
   }
   function retry() {
-    const lastUser = messages.findLastIndex(m => m.role === 'user');
+    let lastUser = -1;
+    messages.forEach((m, index) => { if (m.role === 'user') lastUser = index; });
     if (lastUser < 0) return;
     const history = messages.slice(0, lastUser + 1); commit(history); void answer(history);
   }
@@ -82,14 +83,14 @@ export function ChatWorkspace({ threadId }: { threadId?: string }) {
   useEffect(() => {
     if (threadId && thread?.messages.length === 1 && !autoStarted.current && new URLSearchParams(window.location.search).get('send') === 'true') {
       autoStarted.current = true; void answer(thread.messages);
-      void navigate({ to: '/chat/$threadId', params: { threadId }, search: { send: undefined }, replace: true });
+      void navigate({ to: '/chat/$threadId', params: { threadId }, search: {}, replace: true });
     }
   }, [threadId]);
   return <div className="chat-page">
     <aside className="chat-sidebar">
       <Link to="/" className="chat-home"><ArrowLeft size={16} /> Portfolio</Link>
       <div className="chat-sidebar-heading"><span className="portfolio-label">CONVERSATIONS</span><Button variant="ghost" size="icon" title="New conversation" aria-label="New conversation" onClick={() => { abort.current?.abort(); void navigate({ to: '/chat' }); }}><Plus /></Button></div>
-      <nav aria-label="Conversations">{threads.map(t => <div className="chat-thread" key={t.id}><Button asChild variant={t.id === threadId ? 'secondary' : 'ghost'} className="chat-thread-link"><Link to="/chat/$threadId" params={{ threadId: t.id }} search={{ send: undefined }}>{t.title}</Link></Button><Button size="icon-sm" variant="ghost" title="Delete conversation" aria-label={`Delete ${t.title}`} onClick={() => { remove(t.id); if (t.id === threadId) { abort.current?.abort(); void navigate({ to: '/chat' }); } }}><Trash2 /></Button></div>)}</nav>
+      <nav aria-label="Conversations">{threads.map(t => <div className="chat-thread" key={t.id}><Button asChild variant={t.id === threadId ? 'secondary' : 'ghost'} className="chat-thread-link"><Link to="/chat/$threadId" params={{ threadId: t.id }} search={{}}>{t.title}</Link></Button><Button size="icon-sm" variant="ghost" title="Delete conversation" aria-label={`Delete ${t.title}`} onClick={() => { remove(t.id); if (t.id === threadId) { abort.current?.abort(); void navigate({ to: '/chat' }); } }}><Trash2 /></Button></div>)}</nav>
       <span className="chat-session-label">TEMPORARY SESSION</span>
     </aside>
     <main className="chat-main">
