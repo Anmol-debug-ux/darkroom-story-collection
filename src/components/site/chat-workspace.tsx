@@ -88,7 +88,7 @@ export function ChatWorkspace({ threadId }: { threadId?: string }) {
       autoStarted.current = true; void answer(thread.messages);
     }, 0);
     return () => window.clearTimeout(timer);
-  }, [threadId, thread?.messages]);
+  }, [threadId, thread?.messages, answer]);
   return <div className="chat-page">
     <aside className="chat-sidebar">
       <Link to="/" className="chat-home"><ArrowLeft size={16} /> Portfolio</Link>
