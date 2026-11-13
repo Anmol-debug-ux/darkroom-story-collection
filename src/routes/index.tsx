@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AgentPortfolio } from "@/components/site/agent-portfolio";
+import { NightPortfolio } from "@/components/site/night-portfolio";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Anmol Srivastava — AI Artist & Creative Automation Specialist" },
-      { name: "description", content: "Cinematic AI design, films, UGC ads and creative automation systems by Anmol Srivastava." },
+      { name: "description", content: "AI art, design, projects and creative automation by Anmol Srivastava, Gorakhpur." },
       { property: "og:title", content: "Anmol Srivastava — AI Creative Automation Specialist" },
       { property: "og:description", content: "Creative direction, AI production, and automation systems for brands that want to move faster without looking like it." },
       { property: "og:type", content: "website" },
@@ -16,5 +16,5 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  return <AgentPortfolio />;
+  return <NightPortfolio />;
 }
