@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const chatInput = z.object({
   messages: z.array(z.object({ role: z.enum(['user', 'assistant']), text: z.string().min(1).max(30000) })).min(1).max(200),
 });
-export const CHAT_MODEL = 'gemini-3.8-flash';
+export const CHAT_MODEL = 'gemini-3.5-flash';
 export type ChatEvent = { type: 'text'; text: string } | { type: 'done' } | { type: 'error'; message: string };
 export function providerError(status: number): string {
   if (status === 429) return 'Gemini is busy or your account quota is reached. Please wait and try again.';
