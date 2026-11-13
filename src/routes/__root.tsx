@@ -124,7 +124,6 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
-        <script dangerouslySetInnerHTML={{ __html: `try{var q=new URLSearchParams(location.search).get('agents'),p=localStorage.getItem('portfolio-agents');if(location.pathname==='/'&&(q==='on'||q!=='off'&&(p==='on'||p!=='off'&&!matchMedia('(prefers-reduced-motion: reduce)').matches)))document.documentElement.classList.add('build-mode')}catch(e){}` }} />
       </head>
       <body>
         {children}
