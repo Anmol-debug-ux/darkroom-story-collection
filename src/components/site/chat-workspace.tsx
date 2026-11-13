@@ -81,11 +81,14 @@ export function ChatWorkspace({ threadId }: { threadId?: string }) {
   // Auto-send only a newly created thread, never a reload or an existing URL.
   const autoStarted = useRef(false);
   useEffect(() => {
-    if (threadId && thread?.messages.length === 1 && !autoStarted.current && new URLSearchParams(window.location.search).get('send') === 'true') {
+    if (!threadId || thread?.messages.length !== 1 || autoStarted.current) return;
+    // Defer until route/history synchronization and StrictMode's cleanup finish.
+    const timer = window.setTimeout(() => {
+      if (new URLSearchParams(window.location.search).get('send') !== 'true') return;
       autoStarted.current = true; void answer(thread.messages);
-      void navigate({ to: '/chat/$threadId', params: { threadId }, search: {}, replace: true });
-    }
-  }, [threadId]);
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, [threadId, thread?.messages]);
   return <div className="chat-page">
     <aside className="chat-sidebar">
       <Link to="/" className="chat-home"><ArrowLeft size={16} /> Portfolio</Link>
