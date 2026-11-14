@@ -417,7 +417,7 @@ html { scroll-padding-top: 80px; }
 .np-loader-name { font-size: clamp(2.8rem, 9vw, 8rem); letter-spacing: -0.05em; line-height: 1; }
 .np-loader-line { display: block; height: 1px; background: var(--np-dim); margin: 1.4rem 0 1rem; transform-origin: left; }
 .np-loader-pct { position: absolute; right: 2rem; bottom: 2rem; }
-.np-nav { position: fixed; inset: 0 0 auto; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem clamp(1rem, 4vw, 3rem); background: linear-gradient(var(--np-bg), transparent); }
+.np-nav { position: fixed; inset: 0 0 auto; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem clamp(1rem, 4vw, 3rem); background: color-mix(in oklab, var(--np-bg) 92%, transparent); border-bottom: 1px solid var(--np-line); }
 .np-logo { font-size: 1.3rem; font-weight: 600; letter-spacing: -0.03em; } .np-logo span, .np-hero h1 span { color: var(--np-accent); }
 .np-nav nav { display: flex; gap: 1.8rem; font-size: .85rem; color: var(--np-dim); } .np-nav nav a:hover { color: var(--np-fg); }
 .np-nav-cta { border: 1px solid var(--np-line); border-radius: 999px; padding: .45rem 1rem; font-size: .85rem; } .np-nav-cta:hover { border-color: var(--np-accent); }
