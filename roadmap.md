@@ -1,4 +1,5 @@
 # Roadmap
+- [x] Redesign homepage like the user's reference site (loader, night photo intro, about, journey, work, gallery filters, skills, contact); robots removed
 - [x] Add Gemini chatbot with temporary separate conversations and streaming answers; verified real answers, follow-up memory, thread switching, refresh clearing, and phone layout
 - [x] Restore all eight original design samples and three videos alongside the six existing projects; verified all images and video playback
 - [x] Apply supplied AI-agent portfolio brief using existing personal content and media; verified robot build, Tour to footer, pause, original portrait and phone layout
